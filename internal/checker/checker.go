@@ -15,7 +15,24 @@ func DefaultSites() []Site {
 	return []Site{
 		{Name: "Aparat", URL: "https://www.aparat.com/"},
 		{Name: "Digikala", URL: "https://www.digikala.com/"},
-		// ادامه بقیهٔ سایت‌ها...
+		{Name: "Divaar", URL: "https://divar.ir/"},
+		{Name: "Bale", URL: "https://ble.ir/"},
+		{Name: "Eitaa", URL: "https://eitaa.com/"},
+		{Name: "Zarebin", URL: "https://zarebin.ir/"},
+		{Name: "Varzesh3", URL: "https://www.varzesh3.com/"},
+		{Name: "Shaparak", URL: "https://shaparak.ir/"},
+		{Name: "Blogfa", URL: "https://www.blogfa.com/"},
+		{Name: "Telewebion", URL: "https://telewebion.com/"},
+		{Name: "Google", URL: "https://www.google.com/"},
+		{Name: "Google for Developers", URL: "https://developers.google.com/"},
+		{Name: "Dart packages", URL: "https://pub.dev/"},
+		{Name: "WhatsApp", URL: "https://www.whatsapp.com/"},
+		{Name: "ChatGPT", URL: "https://chatgpt.com/"},
+		{Name: "Instagram", URL: "https://www.instagram.com/"},
+		{Name: "Facebook", URL: "https://www.facebook.com/"},
+		{Name: "Discord", URL: "https://discord.com/"},
+		{Name: "Telegram", URL: "https://telegram.org/"},
+		{Name: "PornHub", URL: "https://www.pornhub.com/"},
 	}
 }
 
