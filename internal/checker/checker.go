@@ -40,7 +40,7 @@ func SendRequest(name string, url string, count int) {
 	count++
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		fmt.Println("❌ NewRequest", "|", name, "|", err)
+		fmt.Println("❌", name, "|", "NewRequest:", err)
 		return
 	}
 	req.Header.Set("If-Modified-Since", "Wed, 21 Oct 2020 07:28:00 GMT")
@@ -54,31 +54,33 @@ func SendRequest(name string, url string, count int) {
 
 	switch resp.StatusCode {
 	case http.StatusNotModified:
-		fmt.Println("✔️  Not Modified", "|", name)
+		fmt.Println("✔️", name, "|", "OK: NotModified")
 	case http.StatusOK:
-		fmt.Println("✔️  OK", "|", name)
+		fmt.Println("✔️", name, "|", "OK")
 	case http.StatusForbidden:
-		fmt.Println("❌ Forbidden", "|", name)
+		fmt.Println("❌", name, "|", "Forbidden")
 	default:
-		fmt.Println("❌ Error", "|", name, "|", resp.StatusCode, http.StatusText(resp.StatusCode))
+		fmt.Println("❌", name, "|", "Error:", resp.StatusCode, http.StatusText(resp.StatusCode))
 	}
 }
 
 func handleError(name, url string, count int, err error) {
 	msg := err.Error()
 	switch {
-	case strings.Contains(msg, "dial tcp") && strings.Contains(msg, "actively refused"):
-		fmt.Println("❌ Blocked", "|", name)
+	case strings.Contains(msg, "dial tcp"):
+		fmt.Println("❌", name, "|", "Blocked:", "Dial")
+	case strings.Contains(msg, "read tcp"):
+		fmt.Println("❌", name, "|", "Blocked:", "Read")
 	case strings.Contains(msg, "TLS handshake timeout"):
-		fmt.Println("❌ Timeout", "|", name)
+		fmt.Println("❌", name, "|", "Timeout")
 		if count < 4 {
 			SendRequest(name, url, count)
 		}
 	case strings.Contains(msg, "forcibly closed"):
-		fmt.Println("❌ Closed", "|", name)
+		fmt.Println("❌", name, "|", "Blocked:", "Closed")
 	case strings.Contains(msg, "no such host"):
-		fmt.Println("❌ NoHost", "|", name)
+		fmt.Println("❌", name, "|", "Blocked:", "NoHost")
 	default:
-		fmt.Println("❌ SendRequest:", "|", name, "|", err)
+		fmt.Println("❌", name, "|", "SendRequest:", err)
 	}
 }
